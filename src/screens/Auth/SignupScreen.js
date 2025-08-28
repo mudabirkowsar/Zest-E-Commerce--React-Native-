@@ -28,7 +28,7 @@ export default function SignupScreen({ navigation }) {
         <View>
             <View style={styles.signupImageContainer}>
                 <Image
-                    source={require("../../../assets/MainFront.jpg")}
+                    source={require("../../../assets/Signup.jpg")}
                     style={{
                         height: '100%',
                         width: '100%',

@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions, Alert } from 'react-native';
 import data from '../../data/data.json'
 import { getRandomProducts } from '../../utils/getRandomProducts';
+import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get("window");
 
@@ -16,29 +17,30 @@ const products = getRandomProducts(data, 6);
 // ];
 
 export default function ForYouVerticalComponent() {
+  const navigation = useNavigation()
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.heading}>Recommended for You</Text>
 
       <View style={styles.grid}>
         <View style={styles.column}>
-          {products.slice(0, 2).map((product) => (
-            <TouchableOpacity key={product.id} style={styles.verticalCard}
-              onPress={() => Alert.alert(product.name)}
+          {products.slice(0, 2).map((item) => (
+            <TouchableOpacity key={item.id} style={styles.verticalCard}
+              onPress={() => navigation.navigate("ProductDescriptionScreen", { product: item })}
             >
-              <Image source={{ uri: product.image1 }} style={styles.verticalImage} />
-              <Text numberOfLines={1} style={styles.verticalText}>{product.name}</Text>
+              <Image source={{ uri: item.image1 }} style={styles.verticalImage} />
+              <Text numberOfLines={1} style={styles.verticalText}>{item.name}</Text>
             </TouchableOpacity>
           ))}
         </View>
 
         <View style={styles.column}>
-          {products.slice(2).map((product) => (
-            <TouchableOpacity key={product.id} style={styles.horizontalCard}
-              onPress={() => Alert.alert(product.name)}
+          {products.slice(2).map((item) => (
+            <TouchableOpacity key={item.id} style={styles.horizontalCard}
+              onPress={() => navigation.navigate("ProductDescriptionScreen", { product: item })}
             >
-              <Image source={{ uri: product.image1 }} style={styles.horizontalImage} />
-              <Text numberOfLines={1} style={styles.horizontalText}>{product.name}</Text>
+              <Image source={{ uri: item.image1 }} style={styles.horizontalImage} />
+              <Text numberOfLines={1} style={styles.horizontalText}>{item.name}</Text>
             </TouchableOpacity>
           ))}
         </View>

@@ -3,6 +3,7 @@ import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import { getRandomProducts } from '../../utils/getRandomProducts';
 import data from '../../data/data.json'
+import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get("window");
 
@@ -15,6 +16,7 @@ const saleItems = getRandomProducts(data, 3)
 // ];
 
 export default function SaleItemsComponent() {
+  const navigation = useNavigation()
   return (
     <LinearGradient
       colors={["#fff5f0", "#ffe1c6"]}
@@ -28,7 +30,7 @@ export default function SaleItemsComponent() {
       <View style={styles.contentRow}>
         {/* Left: Featured Big Card */}
         <TouchableOpacity style={styles.featuredCard}
-          onPress={() => Alert.alert(saleItems[0].name)}
+          onPress={() => navigation.navigate("ProductDescriptionScreen", { product: saleItems[0] })}
         >
           <Image source={{ uri: saleItems[0].image1 }} style={styles.featuredImage} />
           <View style={styles.overlay}>
@@ -46,7 +48,7 @@ export default function SaleItemsComponent() {
         <View style={styles.rightColumn}>
           {saleItems.slice(1).map((item) => (
             <TouchableOpacity key={item.id} style={styles.smallCard}
-              onPress={() => Alert.alert(item.name)}
+              onPress={() => navigation.navigate("ProductDescriptionScreen", { product: item })}
             >
               <Image source={{ uri: item.image1 }} style={styles.smallImage} />
               <View style={styles.overlaySmall}>

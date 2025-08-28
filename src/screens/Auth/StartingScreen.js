@@ -8,7 +8,7 @@ export default function StartingScreen({ navigation }) {
       {/* Image Container  */}
       <View style={styles.imageContainer}>
         <Image
-          source={require("../../../assets/MainFront.jpg")}
+          source={require("../../../assets/Signup.jpg")}
           style={{
             height: '100%',
             width: '100%',
@@ -29,7 +29,7 @@ export default function StartingScreen({ navigation }) {
           style={styles.loginButton}><Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold', color: 'white' }}>Sign Up</Text></TouchableOpacity>
 
         <Text style={{ textAlign: 'center', marginTop: 10, fontWeight: "semibold" }}>Already have an account ? <Text
-          onPress={() => navigation.navigate("LoginScreen")} 
+          onPress={() => navigation.navigate("LoginScreen")}
           style={{ color: '#ff6600', fontWeight: 'bold' }}>Login</Text></Text>
       </View>
     </View>

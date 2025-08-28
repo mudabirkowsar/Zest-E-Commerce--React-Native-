@@ -3,6 +3,7 @@ import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import data from '../../data/data.json'
 import { getRandomProducts } from '../../utils/getRandomProducts';
+import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get("window");
 
@@ -20,6 +21,7 @@ const products = getRandomProducts(data, 6)
 
 
 export default function ProductsMayLove() {
+  const navigation = useNavigation()
   return (
     <LinearGradient colors={['#fff0e5', '#fdd7b0']} style={styles.container}>
       <Text style={styles.title}>Products You May Love</Text>
@@ -31,7 +33,7 @@ export default function ProductsMayLove() {
       >
         {products.map((item) => (
           <TouchableOpacity key={item.id} style={styles.productCard}
-            onPress={() => Alert.alert(item.name)}
+            onPress={() => navigation.navigate("ProductDescriptionScreen", { product: item })}
           >
             <View style={styles.imageContainer}>
               <Image source={{ uri: item.image1 }} style={styles.productImg} />

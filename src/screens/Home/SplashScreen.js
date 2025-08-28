@@ -29,7 +29,7 @@ export default function SplashScreen({navigation}) {
   return (
     <View style={styles.container}>
       <Animated.Image
-        source={require("../../../assets/logo.jpeg")} // replace with your logo path
+        source={require("../../../assets/logoApp.png")} // replace with your logo path
         style={[
           styles.logo,
           {
@@ -39,7 +39,7 @@ export default function SplashScreen({navigation}) {
         ]}
         resizeMode="contain"
       />
-      <Animated.Text
+      {/* <Animated.Text
         style={[
           styles.title,
           {
@@ -48,7 +48,7 @@ export default function SplashScreen({navigation}) {
         ]}
       >
         Zest
-      </Animated.Text>
+      </Animated.Text> */}
     </View>
   );
 }

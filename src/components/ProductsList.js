@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView, StyleSheet, Dimensions, Alert } from "react-native";
 import data from "../../data/data.json";
-import { getRandomProducts, getRandomProductsByCategory } from "../../utils/getRandomProducts";
+import { getRandomProducts } from "../../utils/getRandomProducts";
+import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
 
 const productsData = getRandomProducts(data, 20)
 
 // Product Card
-const ProductCard = ({ product }) => (
-  <TouchableOpacity style={styles.card}
-    onPress={() => Alert.alert(product.name)}
+const ProductCard = ({ product, navigation }) => (
+  <TouchableOpacity style={styles.card} 
+    onPress={() => navigation.navigate("ProductDescriptionScreen", { product })}
   >
     <Image source={{ uri: product.image1 }} style={styles.image} />
     <View style={styles.info}>
@@ -28,12 +29,13 @@ const ProductCard = ({ product }) => (
 );
 
 export default function ProductsList() {
+  const navigation = useNavigation()
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.header}>Products</Text>
       <View style={styles.grid}>
         {productsData.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} navigation={navigation}/>
         ))}
       </View>
     </ScrollView>

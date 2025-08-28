@@ -27,7 +27,7 @@ export default function LoginScreen({ navigation }) {
         <View>
             <View style={styles.signupImageContainer}>
                 <Image
-                    source={require("../../../assets/MainFront.jpg")}
+                    source={require("../../../assets/MainFront.png")}
                     style={{
                         height: '100%',
                         width: '100%',

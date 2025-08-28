@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, ScrollView, Alert } from 'react-native';
 import data from "../../data/data.json";
 import { getRandomProducts } from '../../utils/getRandomProducts';
+import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get("window");
 
@@ -17,12 +18,13 @@ const products = getRandomProducts(data, 6)
 // ];
 
 export default function ForYouLast() {
+  const navigation = useNavigation()
   return (
     <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.grid}>
         {products.map((item) => (
           <TouchableOpacity key={item.id} style={styles.card}
-          onPress={()=> Alert.alert(item.name)}
+          onPress={()=> navigation.navigate("ProductDescriptionScreen", {product:item})}
           >
             <Image source={{ uri: item.image1 }} style={styles.image} />
             <View style={styles.overlay}>
