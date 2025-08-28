@@ -4,6 +4,8 @@ import MainBannerForYou from '../components/MainBannerForYou'
 import ProductsMayLove from '../components/ProductsMayLove'
 import ForYouVerticalComponent from '../components/ForYouVerticalComponent'
 import SaleItemsComponent from '../components/SaleItemsComponent'
+import ForYouLast from '../components/ForYouLast'
+import ProductsList from '../components/ProductsList'
 
 export default function ForYouCategory() {
     return (
@@ -12,7 +14,9 @@ export default function ForYouCategory() {
             <MainBannerForYou />
             <ProductsMayLove />
             <ForYouVerticalComponent/>
+            <ForYouLast/>
             <SaleItemsComponent/>
+            <ProductsList/>
         </View>
     )
 }

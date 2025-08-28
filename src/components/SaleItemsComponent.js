@@ -1,14 +1,18 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, Alert } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
+import { getRandomProducts } from '../../utils/getRandomProducts';
+import data from '../../data/data.json'
 
 const { width } = Dimensions.get("window");
 
-const saleItems = [
-  { id: 1, name: "Smartphone Pro", price: "$699", oldPrice: "$899", img: require("../../assets/smartphoneSale.jpeg") },
-  { id: 2, name: "Wireless Headphones", price: "$99", oldPrice: "$149", img: require("../../assets/headphoneSale.jpeg") },
-  { id: 3, name: "Smartwatch", price: "$159", oldPrice: "$229", img: require("../../assets/smartwatchSale.jpeg") },
-];
+const saleItems = getRandomProducts(data, 3)
+
+// const saleItems = [
+//   { id: 1, name: "Smartphone Pro", price: "$699", oldPrice: "$899", img: require("../../assets/smartphoneSale.jpeg") },
+//   { id: 2, name: "Wireless Headphones", price: "$99", oldPrice: "$149", img: require("../../assets/headphoneSale.jpeg") },
+//   { id: 3, name: "Smartwatch", price: "$159", oldPrice: "$229", img: require("../../assets/smartwatchSale.jpeg") },
+// ];
 
 export default function SaleItemsComponent() {
   return (
@@ -23,8 +27,10 @@ export default function SaleItemsComponent() {
 
       <View style={styles.contentRow}>
         {/* Left: Featured Big Card */}
-        <TouchableOpacity style={styles.featuredCard}>
-          <Image source={saleItems[0].img} style={styles.featuredImage} />
+        <TouchableOpacity style={styles.featuredCard}
+          onPress={() => Alert.alert(saleItems[0].name)}
+        >
+          <Image source={{ uri: saleItems[0].image1 }} style={styles.featuredImage} />
           <View style={styles.overlay}>
             <Text style={styles.featuredName} numberOfLines={1}>
               {saleItems[0].name}
@@ -39,8 +45,10 @@ export default function SaleItemsComponent() {
         {/* Right: Two Small Stacked Cards */}
         <View style={styles.rightColumn}>
           {saleItems.slice(1).map((item) => (
-            <TouchableOpacity key={item.id} style={styles.smallCard}>
-              <Image source={item.img} style={styles.smallImage} />
+            <TouchableOpacity key={item.id} style={styles.smallCard}
+              onPress={() => Alert.alert(item.name)}
+            >
+              <Image source={{ uri: item.image1 }} style={styles.smallImage} />
               <View style={styles.overlaySmall}>
                 <Text style={styles.smallName} numberOfLines={1}>{item.name}</Text>
                 <Text style={styles.price}>{item.price}</Text>
@@ -65,7 +73,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 3 },
     elevation: 4,
     position: "relative",
-    paddingVertical:25,
+    paddingVertical: 25,
   },
   saleBadge: {
     position: "absolute",

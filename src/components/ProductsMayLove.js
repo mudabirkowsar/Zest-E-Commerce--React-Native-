@@ -1,17 +1,23 @@
-import { View, Text, StyleSheet, ScrollView, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, Dimensions, TouchableOpacity, Alert } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
+import data from '../../data/data.json'
+import { getRandomProducts } from '../../utils/getRandomProducts';
 
 const { width } = Dimensions.get("window");
 
+const products = getRandomProducts(data, 6)
+
 // Example product data
-const products = [
-  { id: 1, name: "Smartphone", price: "$499", discount: "10% OFF", img: require("../../assets/productOne.jpg") },
-  { id: 2, name: "Shoes", price: "$120", discount: "15% OFF", img: require("../../assets/productTwo.jpg") },
-  { id: 3, name: "Watch", price: "$250", discount: "20% OFF", img: require("../../assets/productThree.jpg") },
-  { id: 4, name: "Headphones", price: "$89", discount: "5% OFF", img: require("../../assets/clothes.jpg") },
-  { id: 5, name: "Backpack", price: "$65", discount: "12% OFF", img: require("../../assets/productOne.jpg") },
-];
+// const products = [
+//   { id: 1, name: "Smartphone", price: "$499", discount: "10% OFF", img: require("../../assets/productOne.jpg") },
+//   { id: 2, name: "Shoes", price: "$120", discount: "15% OFF", img: require("../../assets/productTwo.jpg") },
+//   { id: 3, name: "Watch", price: "$250", discount: "20% OFF", img: require("../../assets/productThree.jpg") },
+//   { id: 4, name: "Headphones", price: "$89", discount: "5% OFF", img: require("../../assets/clothes.jpg") },
+//   { id: 5, name: "Backpack", price: "$65", discount: "12% OFF", img: require("../../assets/productOne.jpg") },
+// ];
+
+
 
 export default function ProductsMayLove() {
   return (
@@ -24,15 +30,17 @@ export default function ProductsMayLove() {
         style={{ marginTop: 10 }}
       >
         {products.map((item) => (
-          <TouchableOpacity key={item.id} style={styles.productCard}>
+          <TouchableOpacity key={item.id} style={styles.productCard}
+            onPress={() => Alert.alert(item.name)}
+          >
             <View style={styles.imageContainer}>
-              <Image source={item.img} style={styles.productImg} />
+              <Image source={{ uri: item.image1 }} style={styles.productImg} />
               <View style={styles.discountBadge}>
-                <Text style={styles.discountText}>{item.discount}</Text>
+                <Text style={styles.discountText}>{item.discountPercentage} %OFF</Text>
               </View>
             </View>
             <Text style={styles.productName} numberOfLines={1}>{item.name}</Text>
-            <Text style={styles.productPrice}>{item.price}</Text>
+            <Text style={styles.productPrice}>${item.price}</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>

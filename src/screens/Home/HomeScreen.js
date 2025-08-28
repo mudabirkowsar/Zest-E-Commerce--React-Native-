@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ForYouCategory from '../../categories/ForYouCategory';
 import ElectronicsCategory from '../../categories/ElectronicsCategory';
+import Header from '../../components/Header';
 
 
 // Category data with icons
@@ -26,19 +27,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity>
-          <Icon name="" size={28} color="#333" />
-        </TouchableOpacity>
-        <View style={styles.locationBox}>
-          <Icon name="location-outline" size={18} color="#ff6600" />
-          <Text style={styles.locationText}>Srinagar, IN</Text>
-        </View>
-        <TouchableOpacity>
-          <Icon name="cart-outline" size={28} color="#333" />
-        </TouchableOpacity>
-      </View>
+      <Header />
 
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Welcome */}
@@ -99,7 +88,6 @@ export default function HomeScreen() {
         </View>
         {category === "For You" && <ForYouCategory />}
         {category === "Electronics" && <ElectronicsCategory />}
-
       </ScrollView>
 
     </View>
@@ -111,28 +99,7 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     backgroundColor: 'white',
     flex: 1,
-    paddingBottom:30,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: "space-between",
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-  },
-  locationBox: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#fff3e6",
-    paddingHorizontal: 12,
-    paddingVertical: 5,
-    borderRadius: 20,
-  },
-  locationText: {
-    fontSize: 14,
-    color: "#ff6600",
-    marginLeft: 5,
-    fontWeight: "500",
+    // paddingBottom:30,
   },
   welcome: {
     fontSize: 28,
