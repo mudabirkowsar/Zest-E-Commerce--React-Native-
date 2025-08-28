@@ -38,7 +38,10 @@ export default function MainBannerForYou({ imageOne, imageTwo, imageThree, image
                 scrollEnabled={false}
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item }) => (
-                    <Image source={item} style={styles.banner} />
+                    <Image
+                        source={item}
+                        style={styles.banner}
+                    />
                 )}
             />
         </View>

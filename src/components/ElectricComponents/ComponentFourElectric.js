@@ -6,9 +6,9 @@ import { getRandomProductsByCategory } from "../../../utils/getRandomProducts";
 
 const { width } = Dimensions.get("window");
 
-const sampleData = getRandomProductsByCategory(data, 'Electronics', 4);
+const products = getRandomProductsByCategory(data, 'Electronics', 4);
 
-// const sampleData = [
+// const products = [
 //   { id: 1, title: "Bluetooth Speaker", price: "$89", oldPrice: "$120", discount: "10% OFF", image: "https://images.pexels.com/photos/3394655/pexels-photo-3394655.jpeg" },
 //   { id: 2, title: "VR Headset", price: "$299", oldPrice: "$350", discount: "20% OFF", image: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg" },
 //   { id: 3, title: "Smart Lamp", price: "$49", oldPrice: "$70", discount: "15% OFF", image: "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg" },
@@ -19,7 +19,7 @@ export default function ComponentFourElectric() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.heading}>🌟 Top Picks for You</Text>
-      {sampleData.map((item, index) => (
+      {products.map((item, index) => (
         <TouchableOpacity key={item.id} style={[styles.card, { marginTop: index === 0 ? 0 : -30 }]}
         onPress={()=> Alert.alert(item.name)}
         >

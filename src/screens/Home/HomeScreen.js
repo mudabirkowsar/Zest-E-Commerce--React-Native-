@@ -7,6 +7,7 @@ import ForYouCategory from '../../categories/ForYouCategory';
 import ElectronicsCategory from '../../categories/ElectronicsCategory';
 import Header from '../../components/Header';
 import ClothesCategory from '../../categories/ClothesCategory';
+import ShoesCategory from '../../categories/ShoesCategory';
 
 
 // Category data with icons
@@ -90,6 +91,7 @@ export default function HomeScreen() {
         {category === "For You" && <ForYouCategory />}
         {category === "Electronics" && <ElectronicsCategory />}
         {category === "Clothes" && <ClothesCategory />}
+        {category === "Shoes" && <ShoesCategory />}
       </ScrollView>
 
     </View>
