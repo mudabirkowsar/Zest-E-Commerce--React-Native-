@@ -11,12 +11,17 @@ export default function ForYouCategory() {
     return (
         <View>
             {/* Auto Banner Slider */}
-            <MainBannerForYou />
+            <MainBannerForYou
+                imageOne={require('../../assets/banner1.png')}
+                imageTwo={require('../../assets/banner2.png')}
+                imageThree={require('../../assets/banner3.png')}
+                imageFour={require('../../assets/banner4.png')}
+            />
             <ProductsMayLove />
-            <ForYouVerticalComponent/>
-            <ForYouLast/>
-            <SaleItemsComponent/>
-            <ProductsList/>
+            <ForYouVerticalComponent />
+            <ForYouLast />
+            <SaleItemsComponent />
+            <ProductsList />
         </View>
     )
 }

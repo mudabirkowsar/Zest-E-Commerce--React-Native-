@@ -1,5 +1,4 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions, Alert } from 'react-native';
-import React, { useState, useEffect } from 'react';
 import data from '../../data/data.json'
 import { getRandomProducts } from '../../utils/getRandomProducts';
 

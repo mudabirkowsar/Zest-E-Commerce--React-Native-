@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import ForYouCategory from '../../categories/ForYouCategory';
 import ElectronicsCategory from '../../categories/ElectronicsCategory';
 import Header from '../../components/Header';
+import ClothesCategory from '../../categories/ClothesCategory';
 
 
 // Category data with icons
@@ -88,6 +89,7 @@ export default function HomeScreen() {
         </View>
         {category === "For You" && <ForYouCategory />}
         {category === "Electronics" && <ElectronicsCategory />}
+        {category === "Clothes" && <ClothesCategory />}
       </ScrollView>
 
     </View>

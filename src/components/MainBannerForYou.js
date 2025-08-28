@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react'
 
 const { width } = Dimensions.get("window");
 
-export default function MainBannerForYou() {
+export default function MainBannerForYou({ imageOne, imageTwo, imageThree, imageFour }) {
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const flatListRef = useRef(null);
@@ -25,10 +25,7 @@ export default function MainBannerForYou() {
     }, [currentIndex]);
 
     const bannerData = [
-        require("../../assets/banner2.png"),
-        require("../../assets/banner1.png"),
-        require("../../assets/banner3.png"),
-        require("../../assets/banner4.png"),
+        imageOne, imageTwo, imageThree, imageFour
     ];
     return (
         <View style={{ marginTop: 25 }}>

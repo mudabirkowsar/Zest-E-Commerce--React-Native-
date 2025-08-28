@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView, StyleSheet, Dimensions, Alert } from "react-native";
 import data from "../../data/data.json";
-import { getRandomProducts } from "../../utils/getRandomProducts";
+import { getRandomProducts, getRandomProductsByCategory } from "../../utils/getRandomProducts";
 
 const { width } = Dimensions.get("window");
 
@@ -10,9 +10,9 @@ const productsData = getRandomProducts(data, 20)
 // Product Card
 const ProductCard = ({ product }) => (
   <TouchableOpacity style={styles.card}
-  onPress={()=> Alert.alert(product.name)}
+    onPress={() => Alert.alert(product.name)}
   >
-    <Image source={{ uri: product.image1 }} style={styles.image} /> 
+    <Image source={{ uri: product.image1 }} style={styles.image} />
     <View style={styles.info}>
       <Text style={styles.name} numberOfLines={2}>
         {product.name}
