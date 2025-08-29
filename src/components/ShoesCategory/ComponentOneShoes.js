@@ -3,12 +3,14 @@ import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import { getRandomProductsByCategory } from '../../../utils/getRandomProducts';
 import data from '../../../data/data.json'
+import { useNavigation } from '@react-navigation/native';
 
 
 const { width } = Dimensions.get('window');
 const products = getRandomProductsByCategory(data, 'Shoes', 5)
 
 export default function ComponentOneShoes() {
+  const navigation = useNavigation()
   // Example demo products
 //   const products = [
 //     {
@@ -38,7 +40,7 @@ export default function ComponentOneShoes() {
           <TouchableOpacity
             key={item.id}
             style={styles.card}
-            onPress={() => Alert.alert(item.name)}
+            onPress={() => navigation.navigate("ProductDescriptionScreen", { product: item })}
           >
             <ImageBackground
               source={{ uri: item.image1 }}

@@ -3,14 +3,16 @@ import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import { getRandomProductsByCategory } from '../../../utils/getRandomProducts';
 import data from '../../../data/data.json';
+import { useNavigation } from '@react-navigation/native';
 
 export default function ComponentThreeShoes() {
+  const navigation = useNavigation();
   const item = getRandomProductsByCategory(data, 'Shoes', 1)[0]; // Get the first product from array
 
   return (
     <View style={styles.container}>
       <TouchableOpacity activeOpacity={0.9} style={styles.card}
-      onPress={() => Alert.alert(item.name)}
+      onPress={() => navigation.navigate("ProductDescriptionScreen", { product: item })}
       >
         <ImageBackground source={{ uri: item.image1 }} style={styles.image} imageStyle={{ borderRadius: 20 }}>
           {/* Gradient Overlay */}

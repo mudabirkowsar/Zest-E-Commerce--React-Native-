@@ -3,6 +3,7 @@ import React from "react";
 import LinearGradient from "react-native-linear-gradient";
 import data from '../../../data/data.json'
 import { getRandomProductsByCategory } from "../../../utils/getRandomProducts";
+import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
 
@@ -16,6 +17,7 @@ const sampleData = getRandomProductsByCategory(data, 'Electronics', 4);
 // ];
 
 export default function ComponentThreeElectric() {
+  const navigation = useNavigation()
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <LinearGradient
@@ -27,7 +29,7 @@ export default function ComponentThreeElectric() {
         <View style={styles.innerGrid}>
           {sampleData.map((item, index) => (
             <TouchableOpacity key={item.id} style={styles.smallCard}
-            onPress={()=> Alert.alert(item.name)}
+            onPress={()=> navigation.navigate("ProductDescriptionScreen", { product: item })}
             >
               <LinearGradient
                 colors={index % 2 === 0 ? ["#fad0c4", "#ff9a9e"] : ["#a1c4fd", "#c2e9fb"]}

@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, ScrollView, Image, Dimensions, TouchableOpacity, Alert } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import data from '../../data/data.json'
-import { getRandomProducts } from '../../utils/getRandomProducts';
+import data from '../../../data/data.json'
+import { getRandomProducts } from '../../../utils/getRandomProducts';
 import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get("window");

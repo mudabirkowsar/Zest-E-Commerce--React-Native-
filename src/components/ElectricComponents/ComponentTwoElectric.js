@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, ScrollView
 import React from "react";
 import data from '../../../data/data.json'
 import { getRandomProductsByCategory } from "../../../utils/getRandomProducts";
+import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
 
@@ -15,6 +16,7 @@ const sampleData = getRandomProductsByCategory(data, 'Electronics', 4);
 // ];
 
 export default function ComponentTwoElectric() {
+  const navigation = useNavigation()
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.bigCard}>
@@ -22,7 +24,8 @@ export default function ComponentTwoElectric() {
 
         <View style={styles.innerGrid}>
           {sampleData.map((item) => (
-            <TouchableOpacity key={item.id} style={styles.smallCard}>
+            <TouchableOpacity key={item.id} style={styles.smallCard} 
+            onPress={() => navigation.navigate("ProductDescriptionScreen", { product: item })}>
               <Image source={{ uri: item.image1 }} style={styles.image} />
               <Text numberOfLines={1} style={styles.title}>{item.name}</Text>
               <Text style={styles.price}>${item.price}</Text>

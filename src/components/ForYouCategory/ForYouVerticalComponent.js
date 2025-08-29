@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions, Alert } from 'react-native';
-import data from '../../data/data.json'
-import { getRandomProducts } from '../../utils/getRandomProducts';
+import data from '../../../data/data.json'
+import { getRandomProducts } from '../../../utils/getRandomProducts';
 import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get("window");

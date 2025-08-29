@@ -2,11 +2,13 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, Alert } fr
 import React from 'react';
 import data from '../../../data/data.json';
 import { getRandomProductsByCategory } from '../../../utils/getRandomProducts';
+import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get('window');
 const products = getRandomProductsByCategory(data, 'Clothes', 3);
 
 export default function ClothesThreeComponent() {
+    const navigation = useNavigation()
     return (
         <View style={styles.container}>
             <Text style={styles.heading}>🔥 Featured Sale</Text>
@@ -15,7 +17,7 @@ export default function ClothesThreeComponent() {
                 {/* Left Side - Big Product */}
                 <TouchableOpacity
                     style={styles.leftCard}
-                    onPress={() => Alert.alert(products[0].name)}
+                    onPress={() => navigation.navigate("ProductDescriptionScreen", { product: products[0] })}
                 >
                     <Image source={{ uri: products[0].image1 }} style={styles.leftImage} />
                     <View style={styles.badge}>
@@ -41,7 +43,7 @@ export default function ClothesThreeComponent() {
                         <TouchableOpacity
                             key={product.id}
                             style={[styles.smallCard, { marginBottom: index < 2 ? 10 : 0 }]}
-                            onPress={() => Alert.alert(product.name)}
+                            onPress={() => navigation.navigate("ProductDescriptionScreen", { product: product })}
                         >
                             <Image source={{ uri: product.image1 }} style={styles.smallImage} />
                             <View style={styles.badgeSmall}>

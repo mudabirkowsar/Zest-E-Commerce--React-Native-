@@ -2,11 +2,13 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions
 import data from '../../../data/data.json';
 import LinearGradient from 'react-native-linear-gradient';
 import { getRandomProducts, getRandomProductsByCategory } from '../../../utils/getRandomProducts';
+import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get("window");
 const products = getRandomProductsByCategory(data,'Clothes', 5);
 
 export default function ComponentOneClothes() {
+  const navigation = useNavigation()
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.heading}>Recommended for You</Text>
@@ -19,7 +21,7 @@ export default function ComponentOneClothes() {
               <TouchableOpacity 
                 key={product.id} 
                 style={styles.verticalCard}
-                onPress={() => Alert.alert(product.name)}
+                onPress={() => navigation.navigate("ProductDescriptionScreen", { product: product })}
               >
                 <Image source={{ uri: product.image1 }} style={styles.verticalImage} />
                 <View style={styles.badge}>
@@ -36,7 +38,7 @@ export default function ComponentOneClothes() {
               <TouchableOpacity 
                 key={product.id} 
                 style={[styles.horizontalCard, { transform: [{ rotate: index % 2 === 0 ? "-1.5deg" : "1.5deg" }] }]}
-                onPress={() => Alert.alert(product.name)}
+                onPress={() => navigation.navigate("ProductDescriptionScreen", { product: product })}
               >
                 <Image source={{ uri: product.image1 }} style={styles.horizontalImage} />
                 <View style={styles.badgeSmall}>

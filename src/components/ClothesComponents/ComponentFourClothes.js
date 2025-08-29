@@ -3,12 +3,14 @@ import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import data from '../../../data/data.json';
 import { getRandomProductsByCategory } from '../../../utils/getRandomProducts';
+import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get('window');
 const cardWidth = width * 0.44; // Two columns with spacing
 const products = getRandomProductsByCategory(data, 'Clothes', 6);
 
 export default function ComponentFourClothes() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>🔥 Hot Deals</Text>
@@ -22,7 +24,7 @@ export default function ComponentFourClothes() {
                 styles.card,
                 { height: index % 2 === 0 ? 280 : 220 }, // stagger effect
               ]}
-              onPress={() => Alert.alert(item.name)}
+              onPress={() => navigation.navigate("ProductDescriptionScreen", { product: item })}
             >
               {/* item Image with Gradient Overlay */}
               <ImageBackground

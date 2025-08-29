@@ -2,10 +2,12 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Alert } fr
 import React from 'react';
 import { getRandomProductsByCategory } from '../../../utils/getRandomProducts';
 import data from '../../../data/data.json'
+import { useNavigation } from '@react-navigation/native';
 
 const trendingShoes = getRandomProductsByCategory(data, 'Shoes', 4);
 
 export default function ComponentTwoShoes() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>🔥 Trending in Shoes</Text>
@@ -15,7 +17,7 @@ export default function ComponentTwoShoes() {
           <TouchableOpacity
             key={item.id}
             style={styles.card}
-            onPress={() => Alert.alert(item.name)}
+            onPress={() => navigation.navigate("ProductDescriptionScreen", { product: item })}
           >
             {/* item Image */}
             <Image source={{ uri: item.image1 }} style={styles.image} />

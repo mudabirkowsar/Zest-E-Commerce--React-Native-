@@ -2,11 +2,13 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions
 import React from 'react';
 import data from '../../../data/data.json';
 import { getRandomProductsByCategory } from '../../../utils/getRandomProducts';
+import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get("window");
 const products = getRandomProductsByCategory(data, 'Clothes', 6); // Get 6 random products
 
 export default function ComponentTwoClothes() {
+    const navigation = useNavigation();
 
     const handleAddToCart = (product) => {
         Alert.alert('Added to Cart', `${product.name} has been added to your cart!`);
@@ -25,7 +27,7 @@ export default function ComponentTwoClothes() {
                         key={product.id}
                         style={styles.card}
                         activeOpacity={0.9}
-                        onPress={() => Alert.alert(product.name)}
+                        onPress={() => navigation.navigate("ProductDescriptionScreen", { product: product })}
                     >
                         <Image source={{ uri: product.image1 }} style={styles.image} />
                         <View style={styles.info}>
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
         shadowRadius: 8,
         shadowOffset: { width: 0, height: 4 },
         elevation: 5,
-        marginBottom:10,
+        marginBottom: 10,
     },
     image: {
         width: "100%",

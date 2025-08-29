@@ -3,6 +3,7 @@ import React from "react";
 import LinearGradient from "react-native-linear-gradient";
 import data from '../../../data/data.json'
 import { getRandomProductsByCategory } from "../../../utils/getRandomProducts";
+import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
 
@@ -16,12 +17,13 @@ const products = getRandomProductsByCategory(data, 'Electronics', 4);
 // ];
 
 export default function ComponentFourElectric() {
+  const navigation = useNavigation()
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.heading}>🌟 Top Picks for You</Text>
       {products.map((item, index) => (
         <TouchableOpacity key={item.id} style={[styles.card, { marginTop: index === 0 ? 0 : -30 }]}
-        onPress={()=> Alert.alert(item.name)}
+        onPress={()=> navigation.navigate("ProductDescriptionScreen", { product: item })}
         >
           <View style={styles.imageWrapper}>
             <Image source={{ uri: item.image1 }} style={styles.image} />

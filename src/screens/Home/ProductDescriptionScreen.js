@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, Image, ImageBackground, ScrollView, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
+import { View, Text, ImageBackground, ScrollView, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from '@expo/vector-icons';
 import LinearGradient from 'react-native-linear-gradient';
+import RecomendedProducts from "../../components/RecomendedProducts";
+import DeliveryAddressComponent from "../../components/DeliveryAddressComponent";
 
 const { width } = Dimensions.get("window");
 
@@ -13,11 +15,11 @@ export default function ProductDescriptionScreen({ route }) {
     const [liked, setLiked] = useState(false);
 
     const badges = [
-        { label: `Color: ${product.color}`, color: "#f59e0b" },
-        { label: `Warranty: ${product.warranty}`, color: "#10b981" },
-        { label: `Delivery: ${product.deliveryTime}`, color: "#3b82f6" },
-        { label: `Stock: ${product.stock}`, color: "#ef4444" },
-        { label: `Category: ${product.category}`, color: "#8b5cf6" },
+        { label: `Color: ${product.color}`, color: ["#f59e0b", "#fbbf24"] },
+        { label: `Warranty: ${product.warranty}`, color: ["#10b981", "#34d399"] },
+        { label: `Delivery: ${product.deliveryTime}`, color: ["#3b82f6", "#60a5fa"] },
+        { label: `Stock: ${product.stock}`, color: ["#ef4444", "#f87171"] },
+        { label: `Category: ${product.category}`, color: ["#8b5cf6", "#a78bfa"] },
     ];
 
     return (
@@ -33,7 +35,7 @@ export default function ProductDescriptionScreen({ route }) {
             </TouchableOpacity>
 
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 120 }}>
-                {/* Image Carousel as Background */}
+                {/* Image Carousel */}
                 <ScrollView
                     horizontal
                     pagingEnabled
@@ -64,12 +66,12 @@ export default function ProductDescriptionScreen({ route }) {
 
                 {/* Product Info */}
                 <View style={styles.infoContainer}>
-
                     <View>
                         <Text style={styles.name1}>{product.name}</Text>
                         <Text style={styles.brand1}>by {product.brand}</Text>
                         <Text style={styles.descriptionOverlay1} numberOfLines={2}>{product.description}</Text>
                     </View>
+
                     {/* Price */}
                     <View style={styles.priceRow}>
                         <Text style={styles.price}>${product.price.toFixed(2)}</Text>
@@ -80,9 +82,13 @@ export default function ProductDescriptionScreen({ route }) {
                     {/* Badges */}
                     <View style={styles.badgesContainer}>
                         {badges.map((b, idx) => (
-                            <View key={idx} style={[styles.badge, { backgroundColor: b.color }]}>
+                            <LinearGradient
+                                key={idx}
+                                colors={b.color}
+                                style={styles.badge}
+                            >
                                 <Text style={styles.badgeText}>{b.label}</Text>
-                            </View>
+                            </LinearGradient>
                         ))}
                     </View>
 
@@ -90,6 +96,11 @@ export default function ProductDescriptionScreen({ route }) {
                     <Text style={styles.sectionTitle}>Full Description</Text>
                     <Text style={styles.description}>{product.description}</Text>
                 </View>
+
+                <DeliveryAddressComponent />
+
+                {/* Recommended Products */}
+                <RecomendedProducts category={product.category} />
             </ScrollView>
 
             {/* Sticky Buttons */}
@@ -141,9 +152,7 @@ const styles = StyleSheet.create({
     imageOverlay: {
         ...StyleSheet.absoluteFillObject,
     },
-    textOverlay: {
-        padding: 20,
-    },
+    textOverlay: { padding: 20 },
     name: { fontSize: 22, fontWeight: "800", color: "#fff", marginBottom: 4 },
     name1: { fontSize: 22, fontWeight: "800", color: "black", marginBottom: 4 },
     brand: { fontSize: 14, color: "#ddd", marginBottom: 6 },
@@ -158,9 +167,23 @@ const styles = StyleSheet.create({
     price: { fontSize: 20, fontWeight: "800", color: "#27ae60", marginRight: 8 },
     oldPrice: { fontSize: 14, color: "#b2bec3", textDecorationLine: "line-through", marginRight: 8 },
     discount: { fontSize: 14, color: "#d63031", fontWeight: "700" },
+
+    // 🆕 BADGES STYLE
     badgesContainer: { flexDirection: "row", flexWrap: "wrap", marginVertical: 12 },
-    badge: { paddingHorizontal: 10, paddingVertical: 4, borderRadius: 12, marginRight: 8, marginBottom: 8 },
+    badge: {
+        paddingHorizontal: 12,
+        paddingVertical: 6,
+        borderRadius: 20,
+        marginRight: 8,
+        marginBottom: 8,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+        elevation: 3,
+    },
     badgeText: { color: "#fff", fontSize: 12, fontWeight: "700" },
+
     sectionTitle: { fontSize: 16, fontWeight: "700", color: "#2d3436", marginBottom: 4 },
     description: { fontSize: 14, color: "#636e72", lineHeight: 20 },
     stickyButtons: {
