@@ -2,11 +2,13 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, ScrollView
 import React from 'react';
 import data from '../../../data/data.json';
 import { getRandomProductsByCategory } from '../../../utils/getRandomProducts';
+import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get("window");
 const SMALL_CARD_WIDTH = (width - 60) / 2; // 2 columns with spacing inside the big card
 
 export default function ComponentFourShoes() {
+  const navigation = useNavigation()
   const shoes = getRandomProductsByCategory(data, 'Shoes', 4); // 4 shoes for the inner cards
 
   return (
@@ -23,6 +25,7 @@ export default function ComponentFourShoes() {
               styles.smallCard,
               { marginRight: index % 2 === 0 ? 10 : 0, marginBottom: index < 2 ? 10 : 0 },
             ]}
+            onPress={() => navigation.navigate("ProductDescriptionScreen", { product: item })}
           >
             <Image source={{ uri: item.image1 }} style={styles.image} />
             <View style={styles.info}>

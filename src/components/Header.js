@@ -1,18 +1,22 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Header() {
+    const navigation = useNavigation()
     return (
         <View style={styles.header}>
             <TouchableOpacity>
-                <Icon name="" size={28} color="#333" />
+                <Icon name="notifications-outline" size={28} color="#333" />
             </TouchableOpacity>
             <View style={styles.locationBox}>
                 <Icon name="location-outline" size={18} color="#ff6600" />
                 <Text style={styles.locationText}>Srinagar, IN</Text>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity
+            onPress={() => navigation.navigate("CartScreen")}
+            >
                 <Icon name="cart-outline" size={28} color="#333" />
             </TouchableOpacity>
         </View>
