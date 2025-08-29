@@ -25,7 +25,7 @@ export default function MainBannerForYou({ imageOne, imageTwo, imageThree, image
     }, [currentIndex]);
 
     const bannerData = [
-        imageOne, imageTwo, imageThree, imageFour
+        imageTwo, imageOne, imageThree, imageFour
     ];
     return (
         <View style={{ marginTop: 25 }}>

@@ -1,11 +1,23 @@
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../firebase/Firebase';
 
 export default function LoginScreen({ navigation }) {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [focusedInput, setFocusedInput] = useState(null);
+
+    const handleLogin = async () => {
+        if (email && password) {
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+            } catch (error) {
+                Alert.alert("Error: ", error.message)
+            }
+        }
+    }
 
     const inputStyle = (inputName) => ({
         backgroundColor: '#F3F4F6',
@@ -68,10 +80,11 @@ export default function LoginScreen({ navigation }) {
                 </View>
 
                 <TouchableOpacity
+                    onPress={handleLogin}
                     style={styles.loginButton}><Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold', color: 'white' }}>Login</Text></TouchableOpacity>
 
                 <Text style={{ textAlign: 'center', marginTop: 10, fontWeight: "semibold" }}>Don't have an account ? <Text style={{ color: '#ff6600', fontWeight: 'bold' }}
-                onPress={() => navigation.navigate("SignupScreen")}
+                    onPress={() => navigation.navigate("SignupScreen")}
                 >Sign Up</Text></Text>
 
                 <View style={{ flex: 1, justifyContent: 'center', flexDirection: "row", alignItems: 'center', gap: 20, }}>

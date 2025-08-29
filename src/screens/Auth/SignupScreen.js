@@ -1,5 +1,7 @@
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
+import { auth } from '../../../firebase/Firebase'
 
 export default function SignupScreen({ navigation }) {
 
@@ -23,6 +25,23 @@ export default function SignupScreen({ navigation }) {
         borderWidth: focusedInput === inputName ? 2 : 0,
         borderColor: focusedInput === inputName ? '#ff6600' : 'transparent',
     });
+
+    const handleSignup = async () => {
+        if (name && email && password) {
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                await updateProfile(userCredential.user, {
+                    displayName: name
+                })
+            } catch (error) {
+                Alert.alert("Error", error.message)
+            }
+        }
+        else {
+            Alert.alert("Error", "Please fill all the fields")
+        }
+
+    }
 
     return (
         <View>
@@ -81,11 +100,11 @@ export default function SignupScreen({ navigation }) {
                 </View>
 
                 <TouchableOpacity
-                onPress={()=>navigation.navigate("TabNavigation")}
+                    onPress={handleSignup}
                     style={styles.loginButton}><Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold', color: 'white' }}>Sign Up</Text></TouchableOpacity>
 
                 <Text style={{ textAlign: 'center', marginTop: 10, fontWeight: "semibold" }}>Already have an account ? <Text style={{ color: '#ff6600', fontWeight: 'bold' }}
-                onPress={() => navigation.navigate("LoginScreen")}
+                    onPress={() => navigation.navigate("LoginScreen")}
                 >Login</Text></Text>
 
                 <View style={{ flex: 1, justifyContent: 'center', flexDirection: "row", alignItems: 'center', gap: 20, }}>
